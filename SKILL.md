@@ -58,6 +58,7 @@ npm run deck -- moves --family <family> --role <role>   # 쓸 수 있는 move �
 - **`states`가 있는 차트는 `enter: { move: ink-in }`(data 컨셉)**: 기본 enter `baseline-grow`가 숨겨진 `[data-state]` 레이어의 제목까지 드러내 제목이 두 겹으로 보인다
 - **MP4·smoke는 인터넷 필요**: `npx hyperframes`가 실행 때마다 npm 레지스트리에 접속한다. Codex 샌드박스(기본 네트워크 차단)에서는 `codex -c sandbox_workspace_write.network_access=true`로 실행하거나, 덱 작성·plan·빌드만 Codex로 하고 `npm run export`는 밖에서 돌린다
 - **빌드본은 서버로 연다**: `file://`로 열면 모듈 로딩이 막혀 빈 화면이다. `npm run dev` 또는 `npm run preview`
+- **새 덱 index.html에 글꼴 link를 넣는다**: `npm run deck -- new`가 만드는 `index.html`에는 글꼴 `<link>`가 없어 컨셉 글꼴(예: Pretendard) 대신 시스템 글꼴로 그려진다(smoke는 통과). 같은 컨셉 예제 덱의 `index.html` `<head>`에서 글꼴 `<link>`를 옮기고 `lang`·`title`도 고친다
 
 ### 4. 정지점 확인(node)
 
