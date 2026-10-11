@@ -190,7 +190,8 @@ beats:
         notes:
           - { index: 1, text: "+0.5" }
           - { index: 2, text: "+0.6" }
-    place: { slot: full }
+    place: { slot: center }
+    enter: { move: ink-in }   # a states chart: baseline-grow would show the title twice
     steps:
       - { name: steps, move: annotation-pin }
     exportHold: 2.4
@@ -228,7 +229,7 @@ beats:
     unit: "M"
     title: "Sales grew forty-fold in ten years"
     source: s1
-    place: { slot: full }
+    place: { slot: center }
     exportHold: 2.0
 ```
 

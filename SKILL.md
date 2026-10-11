@@ -52,6 +52,13 @@ npm run deck -- moves --family <family> --role <role>   # 쓸 수 있는 move �
 - 같은 move를 같은 role로 2회 이상 쓰면 `repeat: intended`(의도된 리듬일 때만)
 - 영상: 스크럽 = `npm run frames -- <in.mp4> decks/<id>/assets/frames/<name>` 후 `mode: scrub` + `frames`. 재생 = `mode: play|loop`. 스톡은 라이선스와 출처를 `decks/<id>/assets/CREDITS.md`에 기록(`docs/media.md`)
 
+#### 알려진 함정(2026-10 실측)
+
+- **차트는 `place: { slot: center }`**: `slot: full`에 두면 차트 `title`의 왼쪽이 화면 밖으로 잘린다("Visits rose…"가 "isits rose…"로 보임). smoke 검사가 놓칠 수 있으니 sheet.png에서 제목 첫 글자를 확인한다
+- **`states`가 있는 차트는 `enter: { move: ink-in }`(data 컨셉)**: 기본 enter `baseline-grow`가 숨겨진 `[data-state]` 레이어의 제목까지 드러내 제목이 두 겹으로 보인다
+- **MP4·smoke는 인터넷 필요**: `npx hyperframes`가 실행 때마다 npm 레지스트리에 접속한다. Codex 샌드박스(기본 네트워크 차단)에서는 `codex -c sandbox_workspace_write.network_access=true`로 실행하거나, 덱 작성·plan·빌드만 Codex로 하고 `npm run export`는 밖에서 돌린다
+- **빌드본은 서버로 연다**: `file://`로 열면 모듈 로딩이 막혀 빈 화면이다. `npm run dev` 또는 `npm run preview`
+
 ### 4. 정지점 확인(node)
 
 ```bash

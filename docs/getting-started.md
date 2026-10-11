@@ -116,13 +116,14 @@ beats:
         notes:
           - { index: 1, text: "+0.5" }
           - { index: 2, text: "+0.6" }
-    place: { slot: full }
+    place: { slot: center }
+    enter: { move: ink-in }   # a states chart: baseline-grow would show the title twice
     steps:
       - { name: steps, move: annotation-pin }
     exportHold: 2.4
 ```
 
-No beat names an `enter` or `exit` move, so the concept defaults apply. For `data`, these are `line-mask-rise` for text, `count-roll` then `recede` for numbers, and `baseline-grow` for charts. `sample: true` marks the figures as fictional. A deck with real figures sets `sample: false` and gives every number, chart, quote, photo and valued compare a `source` from its `sources` list.
+Only `b-trend` names an `enter` move; the other beats use the concept defaults. For `data`, these are `line-mask-rise` for text, `count-roll` then `recede` for numbers, and `baseline-grow` for charts. A chart with `states` takes `ink-in` instead, because `baseline-grow` also reveals the hidden state titles and the title shows twice. Charts sit in `slot: center`; in `slot: full` the left edge of the title is cut off. `sample: true` marks the figures as fictional. A deck with real figures sets `sample: false` and gives every number, chart, quote, photo and valued compare a `source` from its `sources` list.
 
 Field reference: [writing-a-deck.md](writing-a-deck.md).
 
