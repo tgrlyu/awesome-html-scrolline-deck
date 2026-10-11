@@ -43,7 +43,7 @@ async function main() {
   if (parsed.help) return console.log(usage);
   const { deckId, fps } = parsed;
   const report = await exportPlan(ROOT, parsed);
-  const { buildDir, out } = report;
+  const { buildDir, out, path: pathInfo } = report;
   if (parsed.report) writeFileSync(path.resolve(ROOT, parsed.report), `${JSON.stringify(report, null, 2)}\n`);
   if (parsed.dryRun) return console.log(JSON.stringify(report, null, 2));
   run('npx', ['vite', 'build'], {

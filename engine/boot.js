@@ -257,6 +257,14 @@ export async function boot(opts) {
     // Keep removal private while preserving the public, contract-defined handle shape.
     removeResize = () => window.removeEventListener('resize', onResize);
   } else {
+    // The fonts rebuild below replaces built.tl; a wrapper registered before it
+    // would drive the destroyed timeline and render blank frames.  Export waits:
+    // settle fonts, rebuild once, then register the one timeline it renders.
+    if (document.fonts?.ready && !fontsRebuilt) {
+      await document.fonts.ready;
+      fontsRebuilt = true;
+      await rebuild('fonts');
+    }
     const path = exportPath(map, deck.export);
     bindExportClips(built.beats, path);
     await preloadExportMedia(built.beats);
