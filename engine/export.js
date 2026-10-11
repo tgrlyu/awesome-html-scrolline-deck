@@ -5,6 +5,21 @@ const finite = (value, fallback) => (Number.isFinite(value) ? value : fallback);
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 /**
+ * 순수. stop 이름 → 그 stop beat의 exportHold(초). exportPath의 holds 인자.
+ * boot(렌더되는 timeline)와 tools/export(영상 길이)가 같은 값을 써야 영상이 앞서 가다 멈추지 않는다.
+ * @param {{ beats: Array<{ id: string, exportHold?: number }> }} deck
+ * @param {import('./types.js').TimelineMap} map
+ * @returns {Record<string, number>}
+ */
+export function exportHolds(deck, map) {
+  return Object.fromEntries(
+    map.stops
+      .map((stop) => [stop.name, deck.beats?.find((beat) => beat.id === stop.beat)?.exportHold])
+      .filter(([, hold]) => Number.isFinite(hold)),
+  );
+}
+
+/**
  * 순수. lead → (travel → hold)* → travel → tail.
  * @param {import('./types.js').TimelineMap} map
  * @param {Partial<import('./types.js').ExportOptions>} [opts]

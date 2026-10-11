@@ -2,7 +2,7 @@
 import { EVENTS, RESIZE, VERSION } from './constants.js';
 import { createA11y, prefersReducedMotion } from './a11y.js';
 import { validateDeck } from './deck-schema.js';
-import { buildExportTimeline, exportPath, toExportSeconds } from './export.js';
+import { buildExportTimeline, exportHolds, exportPath, toExportSeconds } from './export.js';
 import { frameSequence, preloadImages, videoClip } from './media.js';
 import { createPresenter } from './presenter.js';
 import { createScrollDriver } from './scroll.js';
@@ -265,7 +265,9 @@ export async function boot(opts) {
       fontsRebuilt = true;
       await rebuild('fonts');
     }
-    const path = exportPath(map, deck.export);
+    // Same holds as tools/export: its composition length counts beat.exportHold,
+    // so a path without them ends early and the MP4 freezes on the last stop.
+    const path = exportPath(map, deck.export, exportHolds(deck, map));
     bindExportClips(built.beats, path);
     await preloadExportMedia(built.beats);
     const wrapper = buildExportTimeline(built.tl, path, gsap);

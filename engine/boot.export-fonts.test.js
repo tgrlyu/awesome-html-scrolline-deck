@@ -18,6 +18,7 @@ vi.mock('./scroll.js', () => ({ createScrollDriver: vi.fn() }));
 vi.mock('./presenter.js', () => ({ createPresenter: vi.fn() }));
 vi.mock('./a11y.js', () => ({ createA11y: vi.fn(), prefersReducedMotion: () => false }));
 vi.mock('./export.js', () => ({
+  exportHolds: () => ({}),
   exportPath: mocks.exportPath,
   buildExportTimeline: mocks.buildExport,
   toExportSeconds: (path, time) => time,

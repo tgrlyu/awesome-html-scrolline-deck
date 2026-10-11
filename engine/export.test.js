@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildExportTimeline, exportPath, toExportSeconds } from './export.js';
+import { buildExportTimeline, exportHolds, exportPath, toExportSeconds } from './export.js';
 
 const map = {
   duration: 10,
@@ -38,6 +38,13 @@ describe('exportPath', () => {
         .map((segment) => segment.end - segment.start),
     ).toEqual([2, 2, 2]);
     expect(path.stopAt.end).toBe(8.7);
+  });
+});
+
+describe('exportHolds', () => {
+  it('maps each stop to its beat exportHold and skips beats without one', () => {
+    const deck = { beats: [{ id: 'open' }, { id: 'middle', exportHold: 2.4 }, { id: 'end', exportHold: 3 }] };
+    expect(exportHolds(deck, map)).toEqual({ middle: 2.4, end: 3 });
   });
 });
 

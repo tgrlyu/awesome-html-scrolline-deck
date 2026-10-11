@@ -20,6 +20,7 @@ vi.mock('./scroll.js', () => ({ createScrollDriver: mocks.createDriver }));
 vi.mock('./presenter.js', () => ({ createPresenter: mocks.createPresenter }));
 vi.mock('./a11y.js', () => ({ createA11y: mocks.createA11y, prefersReducedMotion: () => false }));
 vi.mock('./export.js', () => ({
+  exportHolds: () => ({}),
   exportPath: mocks.exportPath,
   buildExportTimeline: mocks.buildExport,
   toExportSeconds: mocks.toExportSeconds,
